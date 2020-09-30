@@ -11,6 +11,7 @@
 #' @export
 start_fgc_project <- function(data_dir, project_id, species, dir_entities = NULL){
   if(!dir.exists(data_dir)) dir.create(data_dir)
+  
   tryCatch({
     proj <- data.frame(title = project_id, species = species, stringsAsFactors = F)
     write.csv(proj, file=file.path(data_dir,"project.csv"), quote=F)

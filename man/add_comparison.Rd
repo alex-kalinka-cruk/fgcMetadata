@@ -9,9 +9,11 @@ add_comparison(
   name,
   experiment,
   plasmid,
+  time_point_days,
   screen_goal,
   screen_type,
-  library_annotation
+  library_annotation,
+  class_change = NULL
 )
 }
 \arguments{
@@ -21,11 +23,17 @@ add_comparison(
 
 \item{experiment}{The name of one or more experiments in \code{meta$experiment$title}.}
 
+\item{plasmid}{A plasmid name - must exist in \code{meta$plasmid}.}
+
+\item{time_point_days}{An integer giving the \code{time_point_duration_in_days} in \code{experiment}.}
+
 \item{screen_goal}{A screen goal, e.g. "lethality" or "sensitivity".}
 
 \item{screen_type}{A single letter designating the screen type: "n" (knock-out), "a" (activation), or "i" (interference).}
 
 \item{library_annotation}{The name of the library annotation, e.g. "yusa_v3_human.1".}
+
+\item{class_change}{Treat a given sample class as a different class, e.g. to treat baseline samples as controls: c("baseline" = "control").}
 }
 \value{
 Returns an object of class \code{fgcMeta}. Also saves/appends data to \code{comparison.csv} in \code{meta$data_dir}.

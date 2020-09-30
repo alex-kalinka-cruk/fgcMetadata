@@ -4,18 +4,20 @@
 \alias{add_plasmid}
 \title{add_plasmid}
 \usage{
-add_plasmid(meta, name, indexes, slx_id, counts_file)
+add_plasmid(meta, name, indexes, slx_id, counts_file, description = NA)
 }
 \arguments{
 \item{meta}{An object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.}
 
 \item{name}{A plasmid sample name.}
 
-\item{indexes}{A character string naming the indices, e.g. 'i701-i502'. Can be "NA".}
+\item{indexes}{A character string naming the indices, e.g. 'i701-i502'. Can be \code{NA}.}
 
-\item{slx_id}{The SLX ID. Can be \code{NULL} if \code{counts_file} is non-null.}
+\item{slx_id}{The SLX ID. Can be \code{NA} if \code{counts_file} is not \code{NA}.}
 
-\item{counts_file}{A name for the counts file. Can be \code{NULL} if \code{slx_id} is non-null.}
+\item{counts_file}{A name for the counts file. Can be \code{NA} if \code{slx_id} is not \code{NA}.}
+
+\item{description}{A description of the plasmid. Defaults to \code{NA}.}
 }
 \value{
 Returns an object of class \code{fgcMeta}. Also appends data to \code{sequenced_sample.csv} in \code{meta$data_dir}.

@@ -13,6 +13,7 @@ add_analysis <- function(meta, name, description){
     warning(paste("one analysis allowed per 'fgcMeta' object - an analysis already exists:",meta$analysis))
     return(invisible())
   }
+  
   tryCatch({
     meta$analysis <- data.frame(title = name, parent_project = meta$project$title,
                                 description = description, stringsAsFactors = F)
