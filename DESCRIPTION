@@ -1,0 +1,19 @@
+Package: fgcMetadata
+Title: FGC CRISPR Metadata system
+Version: 0.0.1
+Authors@R: 
+    person(given = "Alex",
+           family = "Kalinka",
+           role = c("aut", "cre"),
+           email = "alex.kalinka@cancer.org.uk")
+Description: Tools to enter metadata for FGC CRISPR screens and
+    produce analysis config JSON files.
+License: MIT + file LICENSE
+Imports: 
+    magrittr,
+    openxlsx,
+    tibble
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
