@@ -10,6 +10,7 @@ Description: Tools to enter metadata for FGC CRISPR screens and
     produce analysis config JSON files.
 License: MIT + file LICENSE
 Imports: 
+    dplyr,
     magrittr,
     openxlsx,
     tibble

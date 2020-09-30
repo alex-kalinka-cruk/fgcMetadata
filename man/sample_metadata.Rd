@@ -11,6 +11,9 @@ sample_metadata(meta, sample_csv)
 
 \item{sample_csv}{A path to a sample '.csv' file.}
 }
+\value{
+Returns an object of class \code{fgcMeta}. Also saves data in \code{sample.csv} in \code{meta$data_dir}.
+}
 \description{
 Add sample metadata to an object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.
 }

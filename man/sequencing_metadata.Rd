@@ -11,6 +11,9 @@ sequencing_metadata(meta, ci_xlsx)
 
 \item{ci_xlsx}{A path to a CI sequencing request \code{.xlsx} file.}
 }
+\value{
+Returns an object of class \code{fgcMeta}. Also saves data in \code{sequencing_request.csv} and \code{sequenced_sample.csv} in \code{meta$data_dir}.
+}
 \description{
 Add sample metadata to an object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.
 }

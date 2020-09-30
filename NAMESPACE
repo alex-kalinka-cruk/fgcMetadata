@@ -2,6 +2,9 @@
 
 export("%<>%")
 export("%>%")
+export(add_analysis)
+export(add_comparison)
+export(add_plasmid)
 export(experiment_metadata)
 export(read_ci_submission)
 export(sample_metadata)

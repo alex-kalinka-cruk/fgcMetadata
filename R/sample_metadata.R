@@ -4,6 +4,7 @@
 #' 
 #' @param meta An object of class `fgcMeta`, as produced by `fgcMetadata::start_fgc_project`.
 #' @param sample_csv A path to a sample '.csv' file.
+#' @return Returns an object of class `fgcMeta`. Also saves data in `sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr %>% rename right_join
 sample_metadata <- function(meta, sample_csv){

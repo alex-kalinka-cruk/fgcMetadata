@@ -16,7 +16,7 @@ start_fgc_project(data_dir, project_id, species, dir_entities = NULL)
 \item{dir_entities}{A path to a directory containing entities in a file called \code{entities.rds}.}
 }
 \value{
-Returns an object of class \code{fgcMeta}. Also enters data into a project file.
+Returns an object of class \code{fgcMeta}. Also saves data in \code{project.csv} in \code{data_dir}.
 }
 \description{
 Enter initial data for a project.

@@ -4,6 +4,7 @@
 #' 
 #' @param meta An object of class `fgcMeta`, as produced by `fgcMetadata::start_fgc_project`.
 #' @param ci_xlsx A path to a CI sequencing request `.xlsx` file.
+#' @return Returns an object of class `fgcMeta`. Also saves data in `sequencing_request.csv` and `sequenced_sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr %>% rename select right_join
 #' @importFrom tibble add_column
