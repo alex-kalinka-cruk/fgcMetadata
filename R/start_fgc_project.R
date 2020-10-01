@@ -22,7 +22,7 @@ start_fgc_project <- function(data_dir, project_id, species, dir_entities = NULL
               project = proj, experiment = NA, sample = NA, 
               sequencing_request = NA, sequenced_sample = NA,
               analysis = NA, comparison = NA, comparison_sample = NA,
-              plasmid = NA)
+              plasmid = NA, general = NA, meta = NA)
   class(ret) <- "fgcMeta"
   return(ret)
 }
