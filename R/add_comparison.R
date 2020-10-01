@@ -41,9 +41,8 @@ add_comparison <- function(meta, name, experiment, plasmid, time_point_days, scr
     samps <- meta$sample %>%
       dplyr::filter(parent_experiment %in% experiment & time_point_duration_in_days == time_point_days) %>%
       dplyr::bind_rows(data.frame(title = plasmid, readable_label = plasmid,
-                                  class = "plasmid", time_point_duration_in_days = time_point_days,
-                                  replicate = 1,
-                                  stringsAsFactors = F)) %>%
+                                  class = "plasmid", time_point_duration_in_days = as.character(time_point_days),
+                                  replicate = "1", stringsAsFactors = F)) %>%
       dplyr::left_join(meta$sequenced_sample, by = c("title" = "sample"))
 
     if(nrow(samps) == 0) stop(paste("no samples found for comparison",name))

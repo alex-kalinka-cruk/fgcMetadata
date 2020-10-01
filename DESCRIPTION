@@ -11,8 +11,10 @@ Description: Tools to enter metadata for FGC CRISPR screens and
 License: MIT + file LICENSE
 Imports: 
     dplyr,
+    jsonlite,
     magrittr,
     openxlsx,
+    stringr,
     tibble
 Encoding: UTF-8
 LazyData: true

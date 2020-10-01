@@ -7,7 +7,7 @@
 #' @return Writes a JSON file to disk.
 #' @export
 #' @importFrom dplyr %>% select rename group_by ungroup mutate left_join summarise
-#' @importFrom jsonlite write_json
+#' @importFrom jsonlite toJSON
 make_analysis_config_JSON <- function(meta, file){
   if(!inherits(meta,"fgcMeta")) stop(paste("expecting an object of class 'fgcMeta', got:",class(meta)))
   if(!is.data.frame(meta$comparison_sample)) stop("please first run 'add_comparison()' to add comparisons to your analysis")
@@ -17,9 +17,9 @@ make_analysis_config_JSON <- function(meta, file){
     # 1. samples.
     samps <- meta$sample %>%
       dplyr::rename(slx_id = SLX_id, label = readable_label, name = title) %>%
-      dplyr::mutate(cosmic_id = "NA", r2_fastq_file = "NA") %>%
-      dplyr::select(replicate, r1_fastq_file, indexes, counts_file, treatment, 
-                    cell_model, label, slx_id, r2_fastq_file, class, name)
+      dplyr::mutate(r2_fastq_file = "", cosmic_id = "") %>%
+      dplyr::select(name, class, replicate, r1_fastq_file, indexes, counts_file, treatment, 
+                    cell_model, label, slx_id, r2_fastq_file, cosmic_id)
     
     # 2. comparisons.
     comps <- meta$comparison_sample %>%
@@ -50,7 +50,8 @@ make_analysis_config_JSON <- function(meta, file){
                     percent_transduction_postantibiotic, total_number_of_cells_transduced)
     
     config <- list(samples = samps, comparisons = comps, general = meta$general, meta = meta$meta, qc = qc)
-    jsonlite::write_json(config, file, pretty = T)
+    config_json <- gsub("\\{\\}", "\\[\\]", jsonlite::toJSON(config, pretty = T))
+    cat(config_json, file = file)
   },
   error = function(e) stop(paste("unable to make analysis config JSON:",e))
   )
