@@ -15,7 +15,7 @@ sample_metadata <- function(meta, sample_csv){
     samp <- read.csv(sample_csv, stringsAsFactors = F) %>%
       dplyr::rename(title = sample_identifier,
                     parent_experiment = parental_CRISPR_screen_cell_model)
-    write.csv(samp, file.path(meta$data_dir,"sample.csv"), quote=F)
+    write.csv(samp, file.path(meta$data_dir,"sample.csv"), quote=F, row.names = F)
     meta$sample <- samp
   },
   error = function(e) stop(paste("unable to add sample table:",e))

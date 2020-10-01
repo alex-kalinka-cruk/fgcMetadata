@@ -14,7 +14,7 @@ start_fgc_project <- function(data_dir, project_id, species, dir_entities = NULL
   
   tryCatch({
     proj <- data.frame(title = project_id, species = species, stringsAsFactors = F)
-    write.csv(proj, file=file.path(data_dir,"project.csv"), quote=F)
+    write.csv(proj, file=file.path(data_dir,"project.csv"), quote=F, row.names = F)
   },
   error = function(e) stop(paste("unable to 'start_fgc_project':",e))
   )

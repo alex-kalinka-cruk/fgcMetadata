@@ -12,7 +12,7 @@
 #' @export
 add_plasmid <- function(meta, name, indexes, slx_id, counts_file, description = NA){
   if(!inherits(meta,"fgcMeta")) stop(paste("expecting an object of class 'fgcMeta', got:",class(meta)))
-  if(is.na(meta$sequenced_sample)) stop("please first use 'sequencing_metadata() before adding a plasmid'")
+  if(!is.data.frame(meta$sequenced_sample)) stop("please first use 'sequencing_metadata() before adding a plasmid'")
   if(is.na(slx_id) & is.na(counts_file)) stop("only one of 'slx_id' and 'counts_file' can be NA")
   if(is.null(slx_id) | is.null(counts_file)) stop("please use 'NA' for missing data for either 'slx_id' or 'counts_file'")
   

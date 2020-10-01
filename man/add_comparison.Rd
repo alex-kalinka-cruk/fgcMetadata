@@ -36,7 +36,7 @@ add_comparison(
 \item{class_change}{Treat a given sample class as a different class, e.g. to treat baseline samples as controls: c("baseline" = "control").}
 }
 \value{
-Returns an object of class \code{fgcMeta}. Also saves/appends data to \code{comparison.csv} in \code{meta$data_dir}.
+Returns an object of class \code{fgcMeta}. Also saves/appends data to \code{comparison.csv} and \code{comparison_sample.csv} in \code{meta$data_dir}.
 }
 \description{
 Adds a comparison to an object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.

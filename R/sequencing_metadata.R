@@ -28,8 +28,8 @@ sequencing_metadata <- function(meta, ci_xlsx){
                     r1_fastq, r2_fastq, counts_file, external_count_file, 
                     external_library, description) 
       
-    write.csv(sqr, file.path(meta$data_dir,"sequencing_request.csv"), quote=F)
-    write.csv(seq_samp, file.path(meta$data_dir,"sequenced_sample.csv"), quote=F)
+    write.csv(sqr, file.path(meta$data_dir,"sequencing_request.csv"), quote=F, row.names = F)
+    write.csv(seq_samp, file.path(meta$data_dir,"sequenced_sample.csv"), quote=F, row.names = F)
     meta$sequencing_request <- sqr
     meta$sequenced_sample <- seq_samp
   },

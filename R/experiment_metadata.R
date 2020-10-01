@@ -14,7 +14,7 @@ experiment_metadata <- function(meta, experiment_csv){
   tryCatch({
     exp <- read.csv(experiment_csv, stringsAsFactors = F) %>%
       dplyr::rename(title = CRISPR_screen_cell_model)
-    write.csv(exp, file.path(meta$data_dir,"experiment.csv"), quote=F)
+    write.csv(exp, file.path(meta$data_dir,"experiment.csv"), quote=F, row.names = F)
     meta$experiment <- exp
   },
   error = function(e) stop(paste("unable to add experiment table:",e))

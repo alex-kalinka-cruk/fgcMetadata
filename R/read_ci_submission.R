@@ -6,8 +6,8 @@
 #' @return A named list containing the header information in `header` and a data frame in `samples` containing the samples and their indices.
 #' @export
 #' @importFrom openxlsx read.xlsx
-#' @importFrom dplyr select rename
-#' @importFrom magrittr %>%
+#' @importFrom dplyr %>% select rename
+#' @importFrom magrittr %<>%
 read_ci_submission <- function(file){
   if(!file.exists(file)) stop(paste("unable to find",file))
   
@@ -17,7 +17,9 @@ read_ci_submission <- function(file){
     header_ids <- ci_data$`1`[7:26]
     sr_data <- ci_data$X3[7:26]
     if(!all(header_ids == ci_header_ids))
-      stop(paste("differences in expected CI header IDs:\n Got:\n",header_ids,"\nExpected:\n",ci_header_ids))
+      stop(paste("differences in expected CI header IDs:\n Got:\n",
+                 paste(header_ids,collapse=", "),"\nExpected:\n",paste(ci_header_ids,collapse=", ")))
+
     sqr <- data.frame(title = sr_data[1], sample_type = sr_data[14],
                       sample_source = sr_data[15], library_type = sr_data[8],
                       species = sr_data[16], slx_identifier = sr_data[1],

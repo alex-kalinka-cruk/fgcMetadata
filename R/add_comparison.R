@@ -11,11 +11,12 @@
 #' @param screen_type A single letter designating the screen type: "n" (knock-out), "a" (activation), or "i" (interference).
 #' @param library_annotation The name of the library annotation, e.g. "yusa_v3_human.1".
 #' @param class_change Treat a given sample class as a different class, e.g. to treat baseline samples as controls: c("baseline" = "control").
-#' @return Returns an object of class `fgcMeta`. Also saves/appends data to `comparison.csv` in `meta$data_dir`.
+#' @return Returns an object of class `fgcMeta`. Also saves/appends data to `comparison.csv` and `comparison_sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr %>% filter left_join bind_rows
 add_comparison <- function(meta, name, experiment, plasmid, time_point_days, screen_goal, screen_type, library_annotation, 
                            class_change = NULL){
+  if(!inherits(meta,"fgcMeta")) stop(paste("expecting an object of class 'fgcMeta', got:",class(meta)))
   if(!plasmid %in% meta$plasmid) stop(paste("unable to find",plasmid,"in 'meta$plasmid', please first run 'add_plasmid()'"))
   if(!is.numeric(time_point_days)) stop("'time_point_days' must be an integer")
   if(!all(experiment %in% meta$experiment$title))
@@ -40,16 +41,19 @@ add_comparison <- function(meta, name, experiment, plasmid, time_point_days, scr
     samps <- meta$sample %>%
       dplyr::filter(parent_experiment %in% experiment & time_point_duration_in_days == time_point_days) %>%
       dplyr::bind_rows(data.frame(title = plasmid, readable_label = plasmid,
-                                  class = "plasmid", stringsAsFactors = F)) %>%
+                                  class = "plasmid", time_point_duration_in_days = time_point_days,
+                                  replicate = 1,
+                                  stringsAsFactors = F)) %>%
       dplyr::left_join(meta$sequenced_sample, by = c("title" = "sample"))
+
     if(nrow(samps) == 0) stop(paste("no samples found for comparison",name))
     csamps <- data.frame(title = paste(name,samps$time_point_duration_in_days,"days",samps$class,samps$replicate,sep="-"),
-                         parent_comparison = name, sequenced_sample = samps$sample,
+                         parent_comparison = name, sequenced_sample = samps$title,
                          sample_class = samps$class, stringsAsFactors = F)
     
     if(is.na(meta$comparison_sample)){
       meta$comparison_sample <- csamps
-      write.csv(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), quote=F)
+      write.csv(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), quote=F, row.names = F)
     }else{
       meta$comparison_sample <- rbind(meta$comparison_sample, csamps)
       write.table(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), 
