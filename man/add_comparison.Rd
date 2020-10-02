@@ -12,8 +12,7 @@ add_comparison(
   time_point_days,
   screen_goal,
   screen_type,
-  library_annotation,
-  class_change = NULL
+  library_annotation
 )
 }
 \arguments{
@@ -32,8 +31,6 @@ add_comparison(
 \item{screen_type}{A single letter designating the screen type: "n" (knock-out), "a" (activation), or "i" (interference).}
 
 \item{library_annotation}{The name of the library annotation, e.g. "yusa_v3_human.1".}
-
-\item{class_change}{Treat a given sample class as a different class, e.g. to treat baseline samples as controls: c("baseline" = "control").}
 }
 \value{
 Returns an object of class \code{fgcMeta}. Also saves/appends data to \code{comparison.csv} and \code{comparison_sample.csv} in \code{meta$data_dir}.

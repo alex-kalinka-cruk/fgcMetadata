@@ -31,9 +31,6 @@ sample_metadata <- function(meta, sample_csv){
     
     write.csv(samp, file.path(meta$data_dir,"sample.csv"), quote=F, row.names = F)
     meta$sample <- samp
-    
-    # meta section for JSON config.
-    meta$meta <- data.frame(sample = samp$title, name = samp$readable_label, class = samp$class)
   },
   error = function(e) stop(paste("unable to add sample table:",e))
   )

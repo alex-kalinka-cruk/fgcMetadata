@@ -10,12 +10,11 @@
 #' @param screen_goal A screen goal, e.g. "lethality" or "sensitivity".
 #' @param screen_type A single letter designating the screen type: "n" (knock-out), "a" (activation), or "i" (interference).
 #' @param library_annotation The name of the library annotation, e.g. "yusa_v3_human.1".
-#' @param class_change Treat a given sample class as a different class, e.g. to treat baseline samples as controls: c("baseline" = "control").
 #' @return Returns an object of class `fgcMeta`. Also saves/appends data to `comparison.csv` and `comparison_sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr %>% filter left_join bind_rows
-add_comparison <- function(meta, name, experiment, plasmid, time_point_days, screen_goal, screen_type, library_annotation, 
-                           class_change = NULL){
+add_comparison <- function(meta, name, experiment, plasmid, time_point_days, 
+                           screen_goal, screen_type, library_annotation){
   if(!inherits(meta,"fgcMeta")) stop(paste("expecting an object of class 'fgcMeta', got:",class(meta)))
   if(!plasmid %in% meta$plasmid) stop(paste("unable to find",plasmid,"in 'meta$plasmid', please first run 'add_plasmid()'"))
   if(!is.numeric(time_point_days)) stop("'time_point_days' must be an integer")
