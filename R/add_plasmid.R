@@ -8,7 +8,7 @@
 #' @param slx_id The SLX ID. Can be `NA` if `counts_file` is not `NA`.
 #' @param counts_file A name for the counts file. Can be `NA` if `slx_id` is not `NA`.
 #' @param description A description of the plasmid. Defaults to `NA`.
-#' @return Returns an object of class `fgcMeta`. Also appends data to `sample.csv` and `sequenced_sample.csv` in `meta$data_dir`.
+#' @return Returns an object of class `fgcMeta`. Also saves data to `sample.csv` and `sequenced_sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr bind_rows mutate_all
 add_plasmid <- function(meta, name, indices, slx_id, counts_file, description = NA){
@@ -40,10 +40,8 @@ add_plasmid <- function(meta, name, indices, slx_id, counts_file, description = 
     }else{
       meta$plasmid <- append(meta$plasmid, name)
     }
-    write.table(meta$sample, file.path(meta$data_dir,"sample.csv"), 
-                sep = ",", quote=F, col.names = F, row.names = F, append = T)
-    write.table(meta$sequenced_sample, file.path(meta$data_dir,"sequenced_sample.csv"), 
-                sep = ",", quote=F, col.names = F, row.names = F, append = T)
+    write.csv(meta$sample, file.path(meta$data_dir,"sample.csv"), quote=F, row.names = F)
+    write.csv(meta$sequenced_sample, file.path(meta$data_dir,"sequenced_sample.csv"), quote=F, row.names = F)
   },
   error = function(e) stop(paste("unable to add plasmid data:",e))
   )

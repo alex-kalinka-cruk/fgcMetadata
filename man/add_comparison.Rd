@@ -33,7 +33,7 @@ add_comparison(
 \item{library_annotation}{The name of the library annotation, e.g. "yusa_v3_human.1".}
 }
 \value{
-Returns an object of class \code{fgcMeta}. Also saves/appends data to \code{comparison.csv} and \code{comparison_sample.csv} in \code{meta$data_dir}.
+Returns an object of class \code{fgcMeta}. Also saves data to \code{comparison.csv} and \code{comparison_sample.csv} in \code{meta$data_dir}.
 }
 \description{
 Adds a comparison to an object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.

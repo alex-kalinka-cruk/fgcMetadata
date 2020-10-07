@@ -10,7 +10,7 @@
 #' @param screen_goal A screen goal, e.g. "lethality" or "sensitivity".
 #' @param screen_type A single letter designating the screen type: "n" (knock-out), "a" (activation), or "i" (interference).
 #' @param library_annotation The name of the library annotation, e.g. "yusa_v3_human.1".
-#' @return Returns an object of class `fgcMeta`. Also saves/appends data to `comparison.csv` and `comparison_sample.csv` in `meta$data_dir`.
+#' @return Returns an object of class `fgcMeta`. Also saves data to `comparison.csv` and `comparison_sample.csv` in `meta$data_dir`.
 #' @export
 #' @importFrom dplyr %>% filter left_join bind_rows
 add_comparison <- function(meta, name, experiment, plasmid, time_point_days, 
@@ -29,12 +29,10 @@ add_comparison <- function(meta, name, experiment, plasmid, time_point_days,
                        library_annotation = library_annotation)
     if(is.na(meta$comparison)){
       meta$comparison <- comp
-      write.csv(meta$comparison, file=file.path(meta$data_dir,"comparison.csv"), quote=F)
     }else{
       meta$comparison <- rbind(meta$comparison, comp)
-      write.table(meta$comparison, file=file.path(meta$data_dir,"comparison.csv"), 
-                  sep = ",", quote=F, col.names = F, row.names = F, append = T)
     }
+    write.csv(meta$comparison, file=file.path(meta$data_dir,"comparison.csv"), quote=F, row.names = F)
     
     # comparison_sample table.
     samps <- meta$sample %>%
@@ -51,12 +49,10 @@ add_comparison <- function(meta, name, experiment, plasmid, time_point_days,
     
     if(is.na(meta$comparison_sample)){
       meta$comparison_sample <- csamps
-      write.csv(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), quote=F, row.names = F)
     }else{
       meta$comparison_sample <- rbind(meta$comparison_sample, csamps)
-      write.table(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), 
-                  sep = ",", quote=F, col.names = F, row.names = F, append = T)
     }
+    write.csv(meta$comparison_sample, file=file.path(meta$data_dir,"comparison_sample.csv"), quote=F, row.names = F)
   },
   error = function(e) stop(paste("unable to add comparison to comparison table:",e))
   )

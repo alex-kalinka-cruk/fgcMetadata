@@ -20,7 +20,7 @@ add_plasmid(meta, name, indices, slx_id, counts_file, description = NA)
 \item{description}{A description of the plasmid. Defaults to \code{NA}.}
 }
 \value{
-Returns an object of class \code{fgcMeta}. Also appends data to \code{sample.csv} and \code{sequenced_sample.csv} in \code{meta$data_dir}.
+Returns an object of class \code{fgcMeta}. Also saves data to \code{sample.csv} and \code{sequenced_sample.csv} in \code{meta$data_dir}.
 }
 \description{
 Adds a plasmid experiment to an analysis in an object of class \code{fgcMeta}, as produced by \code{fgcMetadata::start_fgc_project}.
